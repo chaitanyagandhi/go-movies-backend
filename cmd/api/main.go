@@ -40,7 +40,7 @@ func main() {
 	app.JWTSecret = os.Getenv("JWT_SECRET")
 	app.JWTIssuer = "example.com"
 	app.JWTAudience = "example.com"
-	app.CookieDomain = "localhost"
+	app.CookieDomain = ""
 	app.Domain = "example.com"
 	app.APIKey = os.Getenv("API_KEY")
 

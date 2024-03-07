@@ -212,7 +212,7 @@ func (m *PostgresDBRepo) OneMovieForEdit(id int) (*models.Movie, []*models.Genre
 }
 
 func (m *PostgresDBRepo) RegisterUser(user models.User) (int, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 14)

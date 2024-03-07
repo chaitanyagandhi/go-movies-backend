@@ -25,7 +25,7 @@ type application struct {
 }
 
 func main() {
-	err := godotenv.Load()
+	// err := godotenv.Load()
 
 	port := os.Getenv("PORT")
 	if port == "" {

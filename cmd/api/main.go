@@ -38,8 +38,14 @@ func main() {
 
 	app.DSN = os.Getenv("DB_CONNECTION_STRING")
 	app.JWTSecret = os.Getenv("JWT_SECRET")
-	app.JWTIssuer = "example.com"
-	app.JWTAudience = "example.com"
+	app.JWTIssuer = os.Getenv("JWT_ISSUER")
+	if app.JWTIssuer==""{
+		app.JWTIssuer="example.com"
+	}
+	app.JWTAudience = os.Getenv("JWT_AUDIENCE")
+	if app.JWTIssuer==""{
+		app.JWTAudience="example.com"
+	}
 	app.CookieDomain = ""
 	app.Domain = "example.com"
 	app.APIKey = os.Getenv("API_KEY")

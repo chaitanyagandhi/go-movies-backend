@@ -45,6 +45,7 @@ func (app *application) AllMovies(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) authenticate(w http.ResponseWriter, r *http.Request) {
 	//read json payload
+	startTime := time.Now()
 	var requestPayload struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
@@ -85,6 +86,10 @@ func (app *application) authenticate(w http.ResponseWriter, r *http.Request) {
 
 	refreshCookie := app.auth.GetRefreshCookie(tokens.RefreshToken)
 	http.SetCookie(w, refreshCookie)
+
+	elapsedTime := time.Since(startTime)
+
+	w.Header().Add("Server-Timing", fmt.Sprintf("authenticate;dur=%.3f", elapsedTime.Seconds()))
 
 	app.writeJSON(w, http.StatusAccepted, tokens)
 }
